@@ -261,21 +261,22 @@
           <div class="col-12 col-md-6">
             <div class="card p-4 h-100">
               <h5 class="fw-bold text-center mb-3">Send a Message</h5>
-              <form id="contactForm" novalidate>
-                <div class="mb-3">
-                  <label class="form-label">Name</label>
-                  <input type="text" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Email</label>
-                  <input type="email" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Message</label>
-                  <textarea class="form-control" rows="4" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Send Message</button>
+             <form id="contactForm" action="send_mail.php" method="POST" novalidate>
+                  <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Message</label>
+                    <textarea class="form-control" rows="4" name="message" required></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100">Send Message</button>
               </form>
+
             </div>
           </div>
 
