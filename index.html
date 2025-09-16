@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jay Pandya — Portfolio</title>
 
+    <!--Email js-->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -261,21 +263,22 @@
           <div class="col-12 col-md-6">
             <div class="card p-4 h-100">
               <h5 class="fw-bold text-center mb-3">Send a Message</h5>
-              <form id="contactForm" novalidate>
+             <form id="contactForm" novalidate>
                 <div class="mb-3">
                   <label class="form-label">Name</label>
-                  <input type="text" class="form-control" required>
+                  <input type="text" class="form-control" id="name" required>
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Email</label>
-                  <input type="email" class="form-control" required>
+                  <input type="email" class="form-control" id="email" required>
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Message</label>
-                  <textarea class="form-control" rows="4" required></textarea>
+                  <textarea class="form-control" rows="4" id="message" required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Send Message</button>
               </form>
+
             </div>
           </div>
 
@@ -381,6 +384,40 @@
     backToTop.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
+
+    const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (!contactForm.checkValidity()) {
+      contactForm.reportValidity();
+      return;
+    }
+
+    // Collect values
+    const params = {
+      from_name: document.getElementById("name").value,
+      from_email: document.getElementById("email").value,
+      message: document.getElementById("message").value,
+    };
+
+    // Replace with your own IDs from EmailJS
+    emailjs.send("service_y2k888j", "template_2y8nwer", params)
+      .then(() => {
+        alert("✅ Message sent successfully!");
+        contactForm.reset();
+      }, (err) => {
+        console.error("EmailJS Error:", err);
+        alert("❌ Failed to send message. Please try again later.");
+      });
+  });
+}
+
+
+  (function() {
+    emailjs.init("LITn9zih368MouuMU"); // replace with your actual public key
+  })();
 
     </script>
   </body>
