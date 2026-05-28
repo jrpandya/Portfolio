@@ -165,7 +165,7 @@
     .hero {
       min-height: 100vh;
       display: flex; align-items: center;
-      padding: 6rem 1rem 5rem;
+      padding: 4rem 1rem 3rem;
       position: relative; z-index: 1;
     }
     .hero-grid {
@@ -298,7 +298,7 @@
     .stat-label { font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
 
     /* ─── SECTION ─── */
-    section { padding: 5rem 0; position: relative; z-index: 1; }
+    section { padding: 2.5rem 0; position: relative; z-index: 1; }
 
     .sec-tag {
       font-family: var(--mono); font-size: 0.7rem;
@@ -312,7 +312,7 @@
     .sec-line {
       width: 40px; height: 3px;
       background: linear-gradient(90deg, var(--neon), var(--neon2));
-      border-radius: 2px; margin-bottom: 2.5rem;
+      border-radius: 2px; margin-bottom: 1.5rem;
     }
 
     /* ─── GLASS CARD ─── */
@@ -552,8 +552,7 @@
 <main class="container">
 
   <!-- ABOUT -->
-  <section id="about" class="reveal">
-    <h2 class="sec-title">About Me</h2>
+  <section id="about" class="reveal">   <h2 class="sec-title">About Me</h2>
     <div class="sec-line"></div>
     <div class="glass-card">
       <div class="about-item">
@@ -580,8 +579,7 @@
   </section>
 
   <!-- SKILLS -->
-  <section id="skills" class="reveal">
-    <h2 class="sec-title">Tech Stack</h2>
+  <section id="skills" class="reveal">    <h2 class="sec-title">Tech Stack</h2>
     <div class="sec-line"></div>
     <div class="glass-card">
       <div class="skills-grid">
@@ -600,7 +598,7 @@
   </section>
 
   <!-- EXPERIENCE -->
-  <section id="experience" class="reveal">
+  <section id="experience" class="reveal"></p>
     <h2 class="sec-title">Experience</h2>
     <div class="sec-line"></div>
 
@@ -744,7 +742,7 @@
   });
 
   // ── Typed Text ──
-  const roles = ['Python Developer','Odoo ERP Developer','Django Developer','Backend Developer','Full-Stack Developer','Web Develoepr'];
+  const roles = ['Python Developer','Odoo ERP Expert','Django Developer','Backend Engineer'];
   let rIdx=0, cIdx=0, del=false;
   const tel = document.getElementById('typed-text');
   function type() {
