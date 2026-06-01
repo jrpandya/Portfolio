@@ -7,50 +7,45 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    /* ─── DARK THEME ─── */
+    /* ─── DESIGN SYSTEM VARS ─── */
     [data-theme="dark"] {
-      --bg:        #05091A;
-      --bg2:       #0A1128;
-      --card:      rgba(13, 21, 48, 0.75);
-      --card-solid:#0D1530;
-      --border:    rgba(0, 247, 255, 0.12);
-      --neon:      #00F7FF;
-      --neon2:     #7B5CFF;
-      --neon3:     #FF4ECD;
-      --text:      #C8D8FF;
-      --text-dim:  #5A6A9A;
-      --white:     #EDF2FF;
-      --navbar-bg: rgba(5,9,26,0.88);
-      --dot-color: rgba(0, 247, 255, 0.06);
-      --glow:      0 0 20px rgba(0, 247, 255, 0.25), 0 0 40px rgba(0, 247, 255, 0.10);
+      --bg:         #030712;
+      --bg2:        #080f25;
+      --card:       rgba(17, 24, 39, 0.55);
+      --card-solid: #0b1329;
+      --border:     rgba(0, 247, 255, 0.08);
+      --border-hover: rgba(0, 247, 255, 0.25);
+      --neon:       #00F7FF;
+      --neon2:      #6366f1;
+      --neon3:      #f43f5e;
+      --text:       #9ca3af;
+      --text-bright:#e5e7eb;
+      --white:      #ffffff;
+      --navbar-bg:  rgba(3, 7, 18, 0.85);
+      --dot-color:  rgba(0, 247, 255, 0.04);
+      --glow:       0 0 25px rgba(0, 247, 255, 0.15);
       --map-filter: invert(92%) hue-rotate(180deg) saturate(0.6) brightness(0.85);
-      --orb1: rgba(0, 247, 255, 0.04);
-      --orb2: rgba(123, 92, 255, 0.05);
-      --orb3: rgba(255, 78, 205, 0.04);
-      --shadow: 0 20px 40px rgba(0,0,0,0.3);
+      --shadow:     0 20px 40px rgba(0,0,0,0.5);
     }
 
-    /* ─── LIGHT THEME ─── */
     [data-theme="light"] {
-      --bg:        #F0F4FF;
-      --bg2:       #E4ECFF;
-      --card:      rgba(255, 255, 255, 0.85);
-      --card-solid:#FFFFFF;
-      --border:    rgba(99, 102, 241, 0.15);
-      --neon:      #4F46E5;
-      --neon2:     #7C3AED;
-      --neon3:     #EC4899;
-      --text:      #334155;
-      --text-dim:  #94A3B8;
-      --white:     #0F172A;
-      --navbar-bg: rgba(240,244,255,0.92);
-      --dot-color: rgba(99, 102, 241, 0.07);
-      --glow:      0 0 20px rgba(79, 70, 229, 0.2), 0 0 40px rgba(79, 70, 229, 0.08);
+      --bg:         #f8fafc;
+      --bg2:        #f1f5f9;
+      --card:       rgba(255, 255, 255, 0.75);
+      --card-solid: #ffffff;
+      --border:     rgba(99, 102, 241, 0.1);
+      --border-hover: rgba(99, 102, 241, 0.3);
+      --neon:       #4f46e5;
+      --neon2:      #7c3aed;
+      --neon3:      #db2777;
+      --text:       #475569;
+      --text-bright:#1e293b;
+      --white:      #0f172a;
+      --navbar-bg:  rgba(248, 250, 252, 0.9);
+      --dot-color:  rgba(99, 102, 241, 0.05);
+      --glow:       0 0 25px rgba(99, 102, 241, 0.12);
       --map-filter: none;
-      --orb1: rgba(99, 102, 241, 0.06);
-      --orb2: rgba(124, 58, 237, 0.05);
-      --orb3: rgba(236, 72, 153, 0.05);
-      --shadow: 0 20px 40px rgba(99,102,241,0.10);
+      --shadow:     0 20px 40px rgba(99,102,241,0.05);
     }
 
     :root {
@@ -67,427 +62,324 @@
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
-      line-height: 1.7;
+      line-height: 1.75;
       transition: background-color .4s, color .4s;
     }
 
-    /* ─── DOT GRID ─── */
+    /* FIX: Reduced padding from 5rem to 2.5rem to fix excessive vertical gap */
+    section { 
+      padding: 2.5rem 0; 
+      position: relative; 
+      z-index: 1; 
+      scroll-margin-top: 80px;
+    }
+
     body::before {
       content: "";
       position: fixed; inset: 0; z-index: 0;
-      background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
-      background-size: 40px 40px;
+      background-image: radial-gradient(var(--dot-color) 1.5px, transparent 1.5px);
+      background-size: 32px 32px;
       pointer-events: none;
-      transition: background-image .4s;
     }
 
-    /* ─── ORBS ─── */
-    .orb { position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; transition: background .4s; }
-    .orb-1 { width: 500px; height: 500px; background: var(--orb1); top: -100px; right: -100px; }
-    .orb-2 { width: 400px; height: 400px; background: var(--orb2); bottom: 20%; left: -80px; }
-    .orb-3 { width: 300px; height: 300px; background: var(--orb3); top: 50%; right: 10%; }
+    .blur-orb {
+      position: fixed; width: 600px; height: 600px; border-radius: 50%;
+      filter: blur(140px); pointer-events: none; z-index: 0; opacity: 0.4;
+    }
+    .orb-left { background: var(--neon); top: -200px; left: -200px; }
+    .orb-right { background: var(--neon2); bottom: -200px; right: -200px; }
 
-    /* ─── NAVBAR ─── */
+    .text-gradient {
+      background: linear-gradient(135deg, var(--white) 30%, var(--text-bright));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
     .navbar {
       background: var(--navbar-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
-      padding: 0.9rem 0;
+      padding: 1.1rem 0;
       position: sticky; top: 0; z-index: 1000;
-      transition: background .4s, border-color .4s;
     }
     .navbar-brand {
       font-family: var(--mono);
-      font-size: 1.1rem;
-      color: var(--neon) !important;
-      letter-spacing: 1px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--white) !important;
+      letter-spacing: -0.5px;
     }
-    .navbar-brand span { color: var(--text-dim); }
+    .navbar-brand span { color: var(--neon); }
+    
     .nav-link {
       font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--text-dim) !important;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      margin: 0 0.35rem;
+      font-size: 0.8rem;
+      color: var(--text) !important;
+      text-transform: lowercase;
+      margin: 0 0.5rem;
       transition: color .2s;
-      position: relative;
     }
     .nav-link:hover { color: var(--neon) !important; }
-    .nav-link::after {
-      content: ""; position: absolute; bottom: -4px; left: 0;
-      width: 0; height: 1px; background: var(--neon);
-      transition: width .25s;
-    }
-    .nav-link:hover::after { width: 100%; }
 
     .btn-nav {
       font-family: var(--mono);
-      font-size: 0.72rem;
-      border: 1px solid var(--neon);
-      color: var(--neon) !important;
-      padding: 0.38rem 0.9rem;
-      border-radius: 4px;
-      background: transparent;
-      transition: all .2s;
-      cursor: pointer;
-      letter-spacing: 0.5px;
+      font-size: 0.8rem;
+      border: 1px solid var(--border-hover);
+      color: var(--white) !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.02);
+      transition: all .25s ease;
       text-decoration: none;
     }
-    .btn-nav:hover { background: var(--neon); color: var(--bg) !important; box-shadow: var(--glow); }
+    .btn-nav:hover { border-color: var(--neon); background: var(--neon); color: var(--bg) !important; box-shadow: var(--glow); }
 
-    /* ─── THEME TOGGLE BUTTON ─── */
     .theme-btn {
-      width: 40px; height: 22px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 11px;
-      cursor: pointer;
-      position: relative;
-      transition: background .3s;
-      flex-shrink: 0;
-      margin-left: 0.5rem;
+      width: 44px; height: 24px;
+      background: var(--border-hover);
+      border: none; border-radius: 12px;
+      cursor: pointer; position: relative;
+      transition: background .3s; flex-shrink: 0;
     }
     .theme-btn::after {
-      content: "";
-      position: absolute;
-      top: 2px; left: 2px;
-      width: 16px; height: 16px;
-      border-radius: 50%;
-      background: var(--neon);
-      transition: transform .3s, background .3s;
+      content: ""; position: absolute; top: 3px; left: 3px;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--white); transition: transform .3s;
     }
-    [data-theme="light"] .theme-btn::after { transform: translateX(18px); }
-    .theme-icon { font-size: 0.9rem; margin-left: 0.4rem; transition: all .3s; line-height: 1; }
+    [data-theme="light"] .theme-btn::after { transform: translateX(20px); background: var(--neon); }
+    .theme-icon { font-size: 0.95rem; margin-left: 0.5rem; }
 
-    /* ─── HERO ─── */
     .hero {
-      min-height: 100vh;
+      min-height: calc(100vh - 80px);
       display: flex; align-items: center;
-      padding: 4rem 1rem 3rem;
       position: relative; z-index: 1;
+      padding: 1.5rem 0; /* Reduced top/bottom hero spaces */
     }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-    @media (max-width: 768px) {
-      .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
-      .hero-btns { justify-content: center !important; }
-      .hero-stats { justify-content: center !important; }
-      .hero-photo-wrap { order: -1; }
-    }
-
     .hero-tag {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--neon);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      display: inline-flex; align-items: center; gap: 8px;
-      margin-bottom: 1.2rem;
+      font-family: var(--mono); font-size: 0.75rem;
+      color: var(--neon); background: rgba(0, 247, 255, 0.06);
+      border: 1px solid var(--border-hover);
+      padding: 0.35rem 0.85rem; border-radius: 20px;
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-bottom: 1.2rem; text-transform: uppercase; letter-spacing: 1px;
     }
-    .hero-tag::before { content: ""; width: 24px; height: 1px; background: var(--neon); }
+    [data-theme="light"] .hero-tag { background: rgba(99, 102, 241, 0.06); }
+    .hero-tag::before { content: ""; width: 6px; height: 6px; background: var(--neon); border-radius: 50%; }
 
     .hero-name {
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1.05;
-      margin-bottom: 0.6rem;
-      letter-spacing: -2px;
-      transition: color .4s;
+      font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 800;
+      line-height: 1.1; letter-spacing: -2px; margin-bottom: 1rem;
     }
     .hero-role {
-      font-family: var(--mono);
-      font-size: clamp(0.9rem, 2vw, 1.2rem);
-      color: var(--neon2);
-      margin-bottom: 1.5rem;
+      font-family: var(--mono); font-size: clamp(1rem, 2.5vw, 1.35rem);
+      color: var(--neon2); font-weight: 700; margin-bottom: 1.2rem;
     }
     .cursor {
-      display: inline-block;
-      width: 3px; height: 1em;
-      background: var(--neon);
-      vertical-align: middle;
-      animation: blink .8s step-end infinite;
-      margin-left: 2px;
+      display: inline-block; width: 3px; height: 1em; background: var(--neon);
+      vertical-align: middle; animation: blink .8s step-end infinite; margin-left: 4px;
     }
     @keyframes blink { 50% { opacity: 0; } }
 
-    .hero-desc {
-      font-size: 1rem;
-      color: var(--text-dim);
-      max-width: 480px;
-      margin-bottom: 2rem;
-      line-height: 1.8;
+    .hero-desc { font-size: 1.1rem; max-width: 520px; margin-bottom: 2rem; color: var(--text); }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+    @media (max-width: 767.98px) {
+      .hero { text-align: center; }
+      .hero-tag { justify-content: center; }
+      .hero-btns { justify-content: center; }
+      .hero-stats { margin: 2rem auto 0 auto !important; justify-content: center; }
     }
-    .hero-btns { display: flex; flex-wrap: wrap; gap: 0.9rem; }
 
     .btn-primary-custom {
-      font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.5px;
-      padding: 0.7rem 1.6rem; border: none;
-      background: linear-gradient(135deg, var(--neon), var(--neon2));
-      color: #fff !important; border-radius: 6px; font-weight: 700;
-      text-decoration: none; transition: all .3s; display: inline-block;
+      font-family: var(--mono); font-size: 0.85rem; font-weight: 700;
+      padding: 0.85rem 1.8rem; border: none;
+      background: var(--neon); color: var(--bg) !important; border-radius: 8px;
+      text-decoration: none; transition: all .3s ease; display: inline-block;
     }
-    .btn-primary-custom:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(79,70,229,0.4); }
+    .btn-primary-custom:hover { transform: translateY(-3px); box-shadow: var(--glow); opacity: 0.9; }
 
     .btn-outline-custom {
-      font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.5px;
-      padding: 0.7rem 1.6rem; border: 1px solid var(--border);
-      color: var(--text) !important; border-radius: 6px; font-weight: 500;
-      text-decoration: none; transition: all .3s;
-      background: var(--card); backdrop-filter: blur(10px); display: inline-block;
+      font-family: var(--mono); font-size: 0.85rem; font-weight: 500;
+      padding: 0.85rem 1.8rem; border: 1px solid var(--border-hover);
+      color: var(--white) !important; border-radius: 8px;
+      text-decoration: none; transition: all .3s ease;
+      background: rgba(255,255,255,0.02); display: inline-block;
     }
-    .btn-outline-custom:hover { border-color: var(--neon); color: var(--neon) !important; transform: translateY(-2px); }
+    .btn-outline-custom:hover { border-color: var(--neon); transform: translateY(-3px); background: rgba(255,255,255,0.05); }
 
-    /* ─── HERO PHOTO ─── */
-    .hero-photo-wrap {
-      display: flex; justify-content: center; align-items: center;
-      position: relative; min-height: 340px;
-    }
-    .hero-photo-ring {
-      position: absolute; width: 310px; height: 310px;
-      border-radius: 50%;
-      border: 1px solid rgba(0, 247, 255, 0.2);
-      animation: spin 20s linear infinite;
-    }
-    [data-theme="light"] .hero-photo-ring { border-color: rgba(79,70,229,0.2); }
-    .hero-photo-ring-2 {
-      position: absolute; width: 260px; height: 260px;
-      border-radius: 50%;
-      border: 1px dashed rgba(123, 92, 255, 0.25);
-      animation: spin 14s linear infinite reverse;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    .hero-stats { display: flex; gap: 3rem; margin-top: 2.5rem; border-top: 1px solid var(--border); padding-top: 1.2rem; max-width: 400px;}
+    .stat-num { font-family: var(--mono); font-size: 2rem; color: var(--white); font-weight: 700; }
+    .stat-label { font-size: 0.75rem; color: var(--text); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.25rem; }
 
-    /* ── FIXED IMAGE: perfect circle ── */
-    .hero-photo {
-      width: 230px;
-      height: 230px;
-      border-radius: 50%;
-      object-fit: cover;
-      object-position: center top;
-      border: 4px solid var(--neon);
-      box-shadow: 0 0 0 8px rgba(0, 247, 255, 0.07), var(--glow);
-      position: relative; z-index: 1;
-      display: block;
-      transition: transform .4s, border-color .4s, box-shadow .4s;
+    .hero-photo-wrap { display: flex; justify-content: center; align-items: center; position: relative; }
+    .photo-box {
+      width: 290px; height: 290px; border-radius: 24px;
+      background: var(--card-solid); border: 1px solid var(--border-hover);
+      position: relative; padding: 12px; overflow: hidden;
+      box-shadow: var(--shadow); transition: transform 0.4s ease;
     }
-    .hero-photo:hover { transform: scale(1.05); }
-    [data-theme="light"] .hero-photo { border-color: var(--neon); box-shadow: 0 0 0 8px rgba(79,70,229,0.07), var(--glow); }
-
-    /* No-photo fallback avatar */
-    .photo-fallback {
-      width: 230px; height: 230px;
-      border-radius: 50%;
+    @media (max-width: 991.98px) {
+      .photo-box { width: 250px; height: 250px; }
+    }
+    .photo-box:hover { transform: translateY(-6px) rotate(1deg); border-color: var(--neon); }
+    
+    .photo-box img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      object-position: center 15%; 
+      border-radius: 16px; 
+    }
+    
+    .photo-box-fallback {
+      width: 100%; height: 100%; border-radius: 16px;
       background: linear-gradient(135deg, var(--neon2), var(--neon));
       display: flex; align-items: center; justify-content: center;
-      font-size: 5rem;
-      border: 4px solid var(--neon);
-      box-shadow: 0 0 0 8px rgba(0,247,255,0.07), var(--glow);
-      position: relative; z-index: 1;
-      color: white;
+      font-size: 4.5rem; font-weight: 800; color: #fff;
     }
 
-    .hero-stats { display: flex; gap: 2rem; margin-top: 2rem; }
-    .stat-num { font-family: var(--mono); font-size: 1.6rem; color: var(--neon); font-weight: 700; line-height: 1; }
-    .stat-label { font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+    .sec-title { font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 800; letter-spacing: -1.2px; color: var(--white); margin-bottom: 0.4rem; }
+    .sec-line { width: 32px; height: 4px; background: var(--neon); border-radius: 2px; margin-bottom: 1.8rem; }
 
-    /* ─── SECTION ─── */
-    section { padding: 2.5rem 0; position: relative; z-index: 1; }
-
-    .sec-tag {
-      font-family: var(--mono); font-size: 0.7rem;
-      color: var(--neon); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 0.4rem;
-    }
-    .sec-title {
-      font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800;
-      color: var(--white); letter-spacing: -1px; margin-bottom: 0.5rem;
-      transition: color .4s;
-    }
-    .sec-line {
-      width: 40px; height: 3px;
-      background: linear-gradient(90deg, var(--neon), var(--neon2));
-      border-radius: 2px; margin-bottom: 1.5rem;
-    }
-
-    /* ─── GLASS CARD ─── */
     .glass-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      border-radius: 20px;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       padding: 2rem;
-      transition: border-color .3s, transform .3s, box-shadow .3s, background .4s;
+      transition: all .35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @media (max-width: 575.98px) {
+      .glass-card { padding: 1.5rem; }
     }
     .glass-card:hover {
-      border-color: rgba(79,70,229,0.3);
+      border-color: var(--border-hover);
       transform: translateY(-4px);
-      box-shadow: var(--shadow), var(--glow);
+      box-shadow: var(--shadow), rgba(0, 247, 255, 0.03) 0px 10px 30px;
     }
-    [data-theme="dark"] .glass-card:hover { border-color: rgba(0,247,255,0.25); }
 
-    /* ─── ABOUT ─── */
-    .about-item {
-      display: flex; align-items: flex-start; gap: 1rem;
-      padding: 1rem 0; border-bottom: 1px solid var(--border);
-    }
-    .about-item:last-child { border-bottom: none; }
+    .about-item { display: flex; gap: 1.25rem; padding: 1.1rem 0; border-bottom: 1px solid var(--border); }
+    .about-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .about-item:first-child { padding-top: 0; }
     .about-icon {
-      font-size: 1.2rem; width: 40px; height: 40px;
-      background: rgba(0, 247, 255, 0.06); border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; border: 1px solid var(--border);
+      font-size: 1.25rem; width: 44px; height: 44px; background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    [data-theme="light"] .about-icon { background: rgba(79,70,229,0.06); }
-    .about-text { font-size: 0.97rem; color: var(--text); line-height: 1.75; }
+    .about-text { font-size: 1.05rem; line-height: 1.8; color: var(--text); }
+    .about-text strong { color: var(--white); font-weight: 600; }
 
-    /* ─── SKILLS ─── */
-    .skills-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    /* FIX: Clear symmetric layouts for Tech Badges */
     .skill-chip {
-      font-family: var(--mono); font-size: 0.78rem;
-      padding: 0.48rem 1rem; border-radius: 6px;
+      font-family: var(--mono); font-size: 0.85rem; font-weight: 500;
+      padding: 0.65rem 1rem; border-radius: 10px;
       border: 1px solid var(--border); color: var(--text);
-      background: rgba(0, 247, 255, 0.03);
-      transition: all .25s; cursor: default;
+      background: rgba(255,255,255,0.01); transition: all .25s ease;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; height: 100%;
     }
-    .skill-chip:hover { border-color: var(--neon); color: var(--neon); background: rgba(0,247,255,0.08); transform: translateY(-2px); box-shadow: var(--glow); }
-    .skill-chip.featured { border-color: rgba(0,247,255,0.3); color: var(--neon); background: rgba(0,247,255,0.06); }
-    [data-theme="light"] .skill-chip.featured { border-color: rgba(79,70,229,0.3); background: rgba(79,70,229,0.06); }
-    [data-theme="light"] .skill-chip:hover { background: rgba(79,70,229,0.08); }
+    .skill-chip:hover { border-color: var(--neon); color: var(--white); background: rgba(0,247,255,0.04); transform: translateY(-2px); }
+    .skill-chip.featured { border-color: var(--border-hover); color: var(--white); font-weight: 700; background: rgba(99, 102, 241, 0.05); }
+    [data-theme="dark"] .skill-chip.featured { background: rgba(0, 247, 255, 0.03); border-color: rgba(0, 247, 255, 0.2); }
 
-    /* ─── EXPERIENCE ─── */
-    .exp-timeline { position: relative; padding-left: 2.2rem; }
+    .exp-timeline { position: relative; padding-left: 2rem; }
     .exp-timeline::before {
-      content: ""; position: absolute; left: 0; top: 0; bottom: 0;
-      width: 2px; background: linear-gradient(to bottom, var(--neon), var(--neon2), transparent);
-      border-radius: 2px;
+      content: ""; position: absolute; left: 0; top: 6px; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, var(--neon), var(--border) 70%, transparent);
     }
     .exp-dot {
-      position: absolute; left: -6px; top: 1.8rem;
-      width: 14px; height: 14px; border-radius: 50%;
+      position: absolute; left: -5px; top: 6px; width: 11px; height: 11px; border-radius: 50%;
+      background: var(--bg); border: 2px solid var(--border-hover);
     }
-    .exp-dot.current { background: var(--neon); box-shadow: 0 0 12px var(--neon); }
-    .exp-dot.past { background: var(--neon2); box-shadow: 0 0 8px var(--neon2); }
-    .exp-title { font-size: 1.15rem; font-weight: 700; color: var(--white); margin-bottom: 0.15rem; transition: color .4s; }
-    .exp-company { font-family: var(--mono); font-size: 0.8rem; color: var(--neon); margin-bottom: 0.3rem; }
-    .exp-company.past-co { color: var(--neon2); }
+    .exp-dot.current { border-color: var(--neon); background: var(--neon); box-shadow: 0 0 10px var(--neon); }
+    
+    .exp-title { font-size: 1.35rem; font-weight: 700; color: var(--white); margin-bottom: 0.25rem; }
+    .exp-company { font-family: var(--mono); font-size: 0.9rem; color: var(--neon); font-weight: 700; margin-bottom: 0.75rem; }
+    
+    .exp-meta { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.25rem; }
+    .exp-badge { font-family: var(--mono); font-size: 0.68rem; font-weight: 700; padding: 0.25rem 0.65rem; border-radius: 6px; text-transform: uppercase; }
+    .badge-current { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.15); }
+    .badge-past { background: rgba(156, 163, 175, 0.1); color: var(--text); border: 1px solid var(--border); }
+    .badge-duration { background: rgba(255,255,255,0.03); color: var(--text-bright); border: 1px solid var(--border); }
 
-    /* ── Duration chips ── */
-    .exp-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-bottom: 0.8rem; }
-    .exp-badge {
-      font-family: var(--mono); font-size: 0.68rem;
-      padding: 0.22rem 0.65rem; border-radius: 4px; display: inline-block;
-    }
-    .badge-current { background: rgba(0,247,120,0.1); color: #00F778; border: 1px solid rgba(0,247,120,0.2); }
-    .badge-past    { background: rgba(90,106,154,0.2); color: var(--text-dim); border: 1px solid rgba(90,106,154,0.2); }
-    .badge-duration {
-      font-family: var(--mono); font-size: 0.68rem;
-      padding: 0.22rem 0.65rem; border-radius: 4px;
-      background: rgba(123,92,255,0.1); color: var(--neon2);
-      border: 1px solid rgba(123,92,255,0.2);
-    }
-    .exp-desc { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 0.9rem; }
+    .exp-desc { font-size: 1rem; color: var(--text); margin-bottom: 1.25rem; }
     .exp-list { list-style: none; padding: 0; }
-    .exp-list li {
-      font-size: 0.88rem; color: var(--text); padding: 0.38rem 0;
-      padding-left: 1.2rem; position: relative;
-      border-bottom: 1px solid rgba(0,247,255,0.04);
+    .exp-list li { font-size: 0.95rem; color: var(--text); padding: 0.45rem 0 0.45rem 1.25rem; position: relative; }
+    .exp-list li::before { content: "→"; position: absolute; left: 0; color: var(--neon); font-weight: 700; }
+    .exp-list li b { color: var(--white); font-weight: 500; }
+
+    .proj-card { display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
+    .proj-num { font-family: var(--mono); font-size: 2.2rem; font-weight: 700; color: var(--border-hover); opacity: 0.5; margin-bottom: 0.5rem; }
+    .proj-title { font-size: 1.4rem; font-weight: 700; color: var(--white); margin-bottom: 0.75rem; }
+    .proj-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.2rem; }
+    .proj-tech span { font-family: var(--mono); font-size: 0.72rem; padding: 0.2rem 0.6rem; border-radius: 4px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); color: var(--text-bright); }
+    .proj-desc { color: var(--text); font-size: 0.98rem; line-height: 1.7; margin-bottom: 1.5rem; }
+    .proj-link { font-family: var(--mono); font-size: 0.82rem; color: var(--neon); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; transition: gap 0.2s; }
+    .proj-link:hover { gap: 10px; color: var(--neon); }
+
+    .edu-card { display: flex; flex-direction: column; gap: 1.5rem; }
+    .edu-item { display: grid; grid-template-columns: 85px 1fr; gap: 1rem; align-items: start; }
+    @media (max-width: 420px) {
+      .edu-item { grid-template-columns: 1fr; gap: 0.25rem; }
     }
-    [data-theme="light"] .exp-list li { border-bottom-color: rgba(79,70,229,0.05); }
-    .exp-list li::before { content: "▸"; position: absolute; left: 0; color: var(--neon); font-size: 0.72rem; }
-    .exp-list li b { color: var(--white); transition: color .4s; }
+    .edu-year { font-family: var(--mono); font-size: 0.8rem; color: var(--neon2); font-weight: 700; }
+    .edu-degree { font-size: 1.15rem; font-weight: 700; color: var(--white); margin-bottom: 0.2rem; }
+    .edu-school { font-size: 0.95rem; color: var(--text); margin-bottom: 0.4rem; }
+    .edu-score { font-family: var(--mono); font-size: 0.8rem; color: var(--neon); background: rgba(0,247,255,0.03); padding: 0.15rem 0.6rem; border-radius: 4px; border: 1px solid var(--border); display: inline-block; }
+    .edu-divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
-    /* ─── PROJECTS ─── */
-    .proj-num { font-family: var(--mono); font-size: 2.8rem; font-weight: 700; color: rgba(0,247,255,0.08); line-height: 1; margin-bottom: 0.4rem; }
-    [data-theme="light"] .proj-num { color: rgba(79,70,229,0.1); }
-    .proj-title { font-size: 1.25rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; transition: color .4s; }
-    .proj-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
-    .proj-tech span {
-      font-family: var(--mono); font-size: 0.68rem; padding: 0.2rem 0.55rem;
-      border-radius: 4px; background: rgba(123,92,255,0.1); color: var(--neon2);
-      border: 1px solid rgba(123,92,255,0.2);
-    }
-    .proj-link { font-family: var(--mono); font-size: 0.76rem; color: var(--neon); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: gap .2s; }
-    .proj-link:hover { color: var(--neon); gap: 12px; }
+    .lang-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+    .lang-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .lang-item:first-child { padding-top: 0; }
+    .lang-name { font-weight: 600; color: var(--white); font-size: 1.05rem; }
+    .lang-level { font-family: var(--mono); font-size: 0.78rem; color: var(--neon); text-transform: uppercase; }
 
-    /* ─── EDUCATION ─── */
-    .edu-item { display: grid; grid-template-columns: 70px 1fr; gap: 1rem; align-items: start; }
-    .edu-year { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.5px; padding-top: 0.2rem; }
-    .edu-degree { font-size: 0.98rem; font-weight: 600; color: var(--white); transition: color .4s; }
-    .edu-school { font-size: 0.85rem; color: var(--text-dim); }
-    .edu-score { font-family: var(--mono); font-size: 0.78rem; color: var(--neon); display: inline-block; margin-top: 0.15rem; }
-
-    /* ─── LANGUAGES ─── */
-    .lang-item { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 0; border-bottom: 1px solid var(--border); }
-    .lang-item:last-child { border-bottom: none; }
-    .lang-name { font-weight: 600; color: var(--white); transition: color .4s; }
-    .lang-level { font-family: var(--mono); font-size: 0.7rem; color: var(--neon); letter-spacing: 1px; }
-
-    /* ─── CONTACT ─── */
     .contact-item {
-      display: flex; gap: 1rem; align-items: center;
-      padding: 1rem 1.3rem; margin-bottom: 0.75rem;
+      display: flex; gap: 1.25rem; align-items: center;
+      padding: 1.1rem 1.5rem; margin-bottom: 0.85rem;
       background: var(--card); border: 1px solid var(--border);
-      border-radius: 10px; text-decoration: none; transition: all .25s;
+      border-radius: 14px; text-decoration: none; transition: all .25s ease;
     }
-    .contact-item:hover { border-color: var(--neon); transform: translateX(6px); box-shadow: var(--glow); }
-    .contact-icon { font-size: 1.2rem; width: 42px; height: 42px; background: rgba(0,247,255,0.06); border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); flex-shrink: 0; }
-    [data-theme="light"] .contact-icon { background: rgba(79,70,229,0.06); }
-    .contact-label { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
-    .contact-value { font-size: 0.93rem; color: var(--white); font-weight: 500; transition: color .4s; }
+    .contact-item:hover { border-color: var(--neon); transform: translateX(6px); background: var(--card-solid); box-shadow: var(--glow); }
+    .contact-icon { font-size: 1.25rem; width: 44px; height: 44px; background: rgba(255,255,255,0.02); border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); flex-shrink: 0; }
+    .contact-label { font-family: var(--mono); font-size: 0.7rem; color: var(--text); text-transform: uppercase; letter-spacing: 0.5px; }
+    .contact-value { font-size: 1rem; color: var(--white); font-weight: 500; margin-top: 0.15rem; word-break: break-all; }
 
-    /* ─── MAP ─── */
-    .map-wrap { border-radius: 16px; overflow: hidden; border: 1px solid var(--border); height: 100%; min-height: 320px; }
-    .map-wrap iframe { width: 100%; height: 100%; min-height: 320px; border: none; display: block; filter: var(--map-filter); transition: filter .4s; }
+    .map-wrap { border-radius: 20px; overflow: hidden; border: 1px solid var(--border); height: 100%; min-height: 350px; box-shadow: var(--shadow); }
+    .map-wrap iframe { width: 100%; height: 100%; min-height: 350px; border: none; display: block; filter: var(--map-filter); transition: filter .4s; }
 
-    /* ─── FOOTER ─── */
     footer {
-      background: rgba(5,9,26,0.95); border-top: 1px solid var(--border);
-      padding: 2rem 0; text-align: center;
-      font-family: var(--mono); font-size: 0.76rem; color: var(--text-dim);
-      transition: background .4s;
+      border-top: 1px solid var(--border); padding: 2.5rem 0; text-align: center;
+      font-family: var(--mono); font-size: 0.82rem; color: var(--text); background: rgba(0,0,0,0.1);
     }
-    [data-theme="light"] footer { background: rgba(240,244,255,0.98); }
-    footer span { color: var(--neon); }
+    footer span { color: var(--white); font-weight: 700; }
 
-    /* ─── BACK TO TOP ─── */
     #backToTop {
       display: none; position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
-      width: 42px; height: 42px; background: var(--card);
-      border: 1px solid var(--border); border-radius: 8px;
-      color: var(--neon); font-size: 1rem; cursor: pointer;
-      transition: all .3s; backdrop-filter: blur(10px); align-items: center; justify-content: center;
+      width: 46px; height: 46px; background: var(--card-solid);
+      border: 1px solid var(--border-hover); border-radius: 12px;
+      color: var(--neon); font-size: 1.1rem; cursor: pointer;
+      transition: all .3s ease; backdrop-filter: blur(8px); align-items: center; justify-content: center;
     }
-    #backToTop:hover { border-color: var(--neon); box-shadow: var(--glow); transform: translateY(-3px); }
+    #backToTop:hover { border-color: var(--neon); box-shadow: var(--glow); transform: translateY(-4px); }
 
-    /* ─── REVEAL ─── */
-    .reveal { opacity: 0; transform: translateY(30px); transition: all .7s cubic-bezier(.215,.610,.355,1); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: all .65s cubic-bezier(0.215, 0.610, 0.355, 1); }
     .reveal.active { opacity: 1; transform: translateY(0); }
 
-    /* ─── NAVBAR TOGGLER ─── */
-    .navbar-toggler { border-color: var(--border); }
-    .navbar-toggler-icon { background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,247,255,0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); }
-    [data-theme="light"] .navbar-toggler-icon { background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(79,70,229,0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); }
-
-    /* ─── EDU DIVIDER ─── */
-    .edu-divider { border: none; border-top: 1px solid var(--border); margin: 1rem 0; }
+    .navbar-toggler { border-color: var(--border-hover); padding: 0.4rem 0.6rem; }
+    .navbar-toggler-icon { background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,247,255,0.9)' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); }
+    [data-theme="light"] .navbar-toggler-icon { background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(79,70,229,0.9)' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); }
   </style>
 </head>
 <body>
 
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
-<div class="orb orb-3"></div>
+<div class="blur-orb orb-left"></div>
+<div class="blur-orb orb-right"></div>
 
 <button id="backToTop" title="Back to top">↑</button>
 
-<!-- NAVBAR -->
+<!-- NAVBAR ARCHITECTURE -->
 <nav class="navbar navbar-expand-lg">
   <div class="container">
     <a class="navbar-brand" href="#"><span>_</span>jaypandya</a>
@@ -498,15 +390,14 @@
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
         <li class="nav-item"><a class="nav-link" href="#about">about</a></li>
         <li class="nav-item"><a class="nav-link" href="#skills">skills</a></li>
-        <li class="nav-item"><a class="nav-link" href="#experience">exp</a></li>
+        <li class="nav-item"><a class="nav-link" href="#experience">experience</a></li>
         <li class="nav-item"><a class="nav-link" href="#projects">projects</a></li>
         <li class="nav-item"><a class="nav-link" href="#education">education</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">contact</a></li>
-        <li class="nav-item ms-lg-2">
+        <li class="nav-item ms-lg-3 my-2 my-lg-0">
           <a href="resume/Jay_Resume.pdf" target="_blank" class="btn-nav">resume ↗</a>
         </li>
-        <!-- THEME TOGGLE -->
-        <li class="nav-item d-flex align-items-center ms-lg-2" title="Toggle light/dark mode">
+        <li class="nav-item d-flex align-items-center ms-lg-3 mt-2 mt-lg-0" title="Toggle Light/Dark Interface">
           <button class="theme-btn" id="themeToggle" aria-label="Toggle theme"></button>
           <span class="theme-icon" id="themeIcon">🌙</span>
         </li>
@@ -515,16 +406,16 @@
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- HERO SCREEN SYSTEM -->
 <section class="hero">
   <div class="container">
-    <div class="hero-grid">
-      <div>
+    <div class="row align-items-center g-4 g-md-5">
+      <div class="col-md-7 col-lg-8 order-2 order-md-1">
         <div class="hero-tag">Available for work</div>
-        <h1 class="hero-name">Jay<br>Pandya</h1>
+        <h1 class="hero-name text-gradient">Jay<br>Pandya</h1>
         <div class="hero-role">&lt;<span id="typed-text">Python Developer</span><span class="cursor"></span>/&gt;</div>
         <p class="hero-desc">
-          Backend developer specializing in <strong style="color:var(--white)">Python, Odoo ERP, Django</strong> and enterprise application systems. Building robust solutions that power real businesses.
+          Backend developer specializing in <b>Python, Odoo ERP, Django</b>, and enterprise architecture blueprints. Shaping highly efficient systems designed to scale real business workflows.
         </p>
         <div class="hero-btns">
           <a href="#projects" class="btn-primary-custom">View Projects →</a>
@@ -533,159 +424,196 @@
         </div>
         <div class="hero-stats">
           <div><div class="stat-num">8.92</div><div class="stat-label">BCA CGPA</div></div>
-          <div><div class="stat-num">2+</div><div class="stat-label">Projects</div></div>
+          <div><div class="stat-num">2+</div><div class="stat-label">Core Projects</div></div>
         </div>
       </div>
 
-      <!-- PHOTO -->
-      <div class="hero-photo-wrap">
-        <div class="hero-photo-ring"></div>
-        <div class="hero-photo-ring-2"></div>
-        <img src="img/my.jpg" alt="Jay Pandya" class="hero-photo"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div class="photo-fallback" style="display:none;">JP</div>
+      <!-- PORTRAIT BOX STYLING -->
+      <div class="col-md-5 col-lg-4 order-1 order-md-2 hero-photo-wrap mb-4 mb-md-0">
+        <div class="photo-box">
+          <img src="img/my.jpg" alt="Jay Pandya" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-box-fallback" style="display:none;">JP</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- CONTAINER WRAPPERS -->
 <main class="container">
 
-  <!-- ABOUT -->
-  <section id="about" class="reveal">   <h2 class="sec-title">About Me</h2>
+  <!-- ABOUT WRAPPERS -->
+  <section id="about" class="reveal">
+    <h2 class="sec-title">About Me</h2>
     <div class="sec-line"></div>
     <div class="glass-card">
       <div class="about-item">
         <div class="about-icon">🎓</div>
-        <div class="about-text">Currently pursuing <strong style="color:var(--white)">MCA (Sem 2 Completed)</strong> from Dr. Subhash University — building deeper knowledge in computer science and enterprise systems.</div>
+        <div class="about-text">Currently pursuing <strong>MCA (Sem 2 Completed)</strong> from Dr. Subhash University — refining architectural foundations in computer science and robust system patterns.</div>
       </div>
       <div class="about-item">
         <div class="about-icon">💻</div>
-        <div class="about-text">I specialize in <strong style="color:var(--white)">backend architecture and enterprise business tools</strong>, with hands-on experience in Python, Odoo ERP, Django, DRF, and PostgreSQL.</div>
+        <div class="about-text">I specialize in <strong>backend architecture and business operational tools</strong>, handling everyday operations in Python, Odoo ERP stacks, Django frameworks, DRF, and PostgreSQL clusters.</div>
       </div>
       <div class="about-item">
         <div class="about-icon">🏢</div>
-        <div class="about-text">Seeking a professional environment where I can grow <strong style="color:var(--white)">technically, financially, and socially</strong> — contributing meaningfully to the team and company vision.</div>
+        <div class="about-text">Seeking an innovative engineering team where I can scale <strong>technically, financially, and socially</strong> — delivering performance values to company milestones.</div>
       </div>
       <div class="about-item">
         <div class="about-icon">🚀</div>
-        <div class="about-text">My goal is to solve real-world deployment challenges by applying my education and experience, while <strong style="color:var(--white)">continuously evolving</strong> alongside modern tech.</div>
+        <div class="about-text">Driven to tackle structural optimization problems by matching real-world edge deployment issues with solid, maintainable computing models.</div>
       </div>
       <div class="about-item">
         <div class="about-icon">🌱</div>
-        <div class="about-text">I believe in writing <strong style="color:var(--white)">clean, maintainable code</strong> and developing skills that truly add value — not just to projects, but to the people who use them.</div>
+        <div class="about-text">Deeply invested in writing <strong>clean, declarative documentation and code structures</strong> that remain highly maintainable for future feature horizons.</div>
       </div>
     </div>
   </section>
 
-  <!-- SKILLS -->
-  <section id="skills" class="reveal">    <h2 class="sec-title">Tech Stack</h2>
+  <!-- SKILLS CODES -->
+  <section id="skills" class="reveal">
+    <h2 class="sec-title">Tech Stack</h2>
     <div class="sec-line"></div>
     <div class="glass-card">
-      <div class="skills-grid">
-        <span class="skill-chip featured">Odoo ERP</span>
-        <span class="skill-chip featured">Python</span>
-        <span class="skill-chip featured">Django</span>
-        <span class="skill-chip featured">Django REST Framework</span>
-        <span class="skill-chip featured">PostgreSQL</span>
-        <span class="skill-chip">MySQL</span>
-        <span class="skill-chip">JavaScript</span>
-        <span class="skill-chip">Bootstrap 5</span>
-        <span class="skill-chip">HTML5 / CSS3</span>
-        <span class="skill-chip">PHP</span>
+      <!-- FIX: Explicit structural bootstrap row grid setup instead of random alignment -->
+      <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
+        <div class="col"><div class="skill-chip featured">Odoo ERP</div></div>
+        <div class="col"><div class="skill-chip featured">Python</div></div>
+        <div class="col"><div class="skill-chip featured">Django</div></div>
+        <div class="col"><div class="skill-chip featured">Django REST Framework</div></div>
+        <div class="col"><div class="skill-chip featured">PostgreSQL</div></div>
+        <div class="col"><div class="skill-chip">MySQL</div></div>
+        <div class="col"><div class="skill-chip">JavaScript</div></div>
+        <div class="col"><div class="skill-chip">Bootstrap 5</div></div>
+        <div class="col"><div class="skill-chip">HTML5 / CSS3</div></div>
+        <div class="col"><div class="skill-chip">PHP</div></div>
       </div>
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
-  <section id="experience" class="reveal"></p>
+  <!-- TIMELINE EXPERIENCE SECTIONS -->
+  <section id="experience" class="reveal">
     <h2 class="sec-title">Experience</h2>
     <div class="sec-line"></div>
 
-    <!-- Current Job -->
+    <!-- Active Positions -->
     <div class="glass-card mb-4">
       <div class="exp-timeline">
         <div class="exp-dot current"></div>
         <div class="exp-title">Associate Odoo Developer</div>
         <div class="exp-company">Applified</div>
         <div class="exp-meta">
-          <span class="exp-badge badge-current">● Current Role</span>
-          <span class="exp-badge badge-duration">⏱ 1 Month (May 2026 – Present)</span>
+          <span class="exp-badge badge-current">● Active Role</span>
+          <span class="exp-badge badge-duration">⏱ May 2026 – Present</span>
         </div>
-        <p class="exp-desc">Focusing on standard Odoo ERP functional workflows, module configuration, and data validation to support ongoing enterprise projects.</p>
-        <h6 style="font-size:0.82rem; font-weight:700; color:var(--white); margin-bottom:0.6rem; font-family:var(--mono);">Key Focus Areas:</h6>
+        <p class="exp-desc">Managing baseline enterprise business loops, framework module architecture setups, and database integration checks to streamline production workflows.</p>
+        <h6 style="font-size:0.85rem; font-weight:700; color:var(--white); margin-bottom:0.75rem; font-family:var(--mono); text-transform:uppercase; letter-spacing:0.5px;">Key Focus Areas:</h6>
         <ul class="exp-list">
-          <li><b>Odoo Functional Workflows:</b> Exploring core enterprise apps to understand how business logic maps within the Odoo ecosystem.</li>
-          <li><b>Module Configuration:</b> Setting up and testing default Odoo modules to align system parameters with client needs.</li>
-          <li><b>Data Management:</b> Using PostgreSQL to verify data integrity and check relational tables.</li>
-          <li><b>Technical Learning:</b> Analyzing system logs and collaborating with senior developers to prepare for live custom code development.</li>
+          <li><b>Odoo Functional Workflows:</b> Exploring structural layers of standard enterprise apps to inspect underlying database mapping.</li>
+          <li><b>Module Configuration:</b> Provisioning modular dependencies to adapt raw business calculations safely to localized parameter settings.</li>
+          <li><b>Data Management:</b> Writing analytical rules inside PostgreSQL to maintain referential relational indices and clean transaction records.</li>
+          <li><b>Technical Learning:</b> Inspecting diagnostic system outputs and debugging backend application blocks with senior engine leads.</li>
         </ul>
       </div>
     </div>
 
-    <!-- Internship -->
+    <!-- Finished Positions -->
     <div class="glass-card">
       <div class="exp-timeline">
-        <div class="exp-dot past"></div>
+        <div class="exp-dot"></div>
         <div class="exp-title">Python & Odoo Developer</div>
-        <div class="exp-company past-co">Applified</div>
+        <div class="exp-company">Applified</div>
         <div class="exp-meta">
-          <span class="exp-badge badge-past">Internship Completed</span>
-          <span class="exp-badge badge-duration" style="background:rgba(255,78,205,0.08);color:var(--neon3);border-color:rgba(255,78,205,0.2);">⏱ ~6 Months (Nov 2025 – Apr 2026)</span>
+          <span class="exp-badge badge-past">Internship Finished</span>
+          <span class="exp-badge badge-duration">⏱ 6 Months (Nov 2025 – Apr 2026)</span>
         </div>
-        <p class="exp-desc">Intensive technical internship focused on core backend systems, REST APIs, and enterprise framework development from fundamentals to deployment.</p>
-        <h6 style="font-size:0.82rem; font-weight:700; color:var(--white); margin-bottom:0.6rem; font-family:var(--mono);">What I Learned:</h6>
+        <p class="exp-desc">Intensive backend training path specializing in service layers, system integrations, and structured data flow components across modern web frameworks.</p>
+        <h6 style="font-size:0.85rem; font-weight:700; color:var(--white); margin-bottom:0.75rem; font-family:var(--mono); text-transform:uppercase; letter-spacing:0.5px;">Core Competencies Gained:</h6>
         <ul class="exp-list">
-          <li><b>Python Core & Django:</b> Built clean, structured backend applications using core Python and managed MVC architecture with Django.</li>
-          <li><b>Django REST Framework (DRF):</b> Designed and developed functional REST APIs for seamless data communication between apps.</li>
-          <li><b>Odoo Development:</b> Learned Odoo architecture, mastered standard enterprise workflows, and created custom modules and views.</li>
-          <li><b>PostgreSQL:</b> Developed a solid understanding of relational data management and database structures.</li>
+          <li><b>Python & Django Systems:</b> Programmed clean logic patterns inside MVC code boundaries to secure modular system routing.</li>
+          <li><b>Django REST Architecture:</b> Formulated data serializations and structured multi-point REST APIs for client-side consuming panels.</li>
+          <li><b>Odoo Framework Layers:</b> Practiced dynamic XML dashboard creations, customized object inheritance chains, and internal system logic.</li>
+          <li><b>Relational Relational Engines:</b> Drafted relational structures, handling custom indices inside standard transactional databases.</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
+  <!-- GRID PROJECTS BLOCKS -->
   <section id="projects" class="reveal">
     <h2 class="sec-title">Projects</h2>
     <div class="sec-line"></div>
     <div class="row g-4">
       <div class="col-md-6">
-        <div class="glass-card h-100">
-          <div class="proj-num">01</div>
-          <div class="proj-title">Delivery Delight</div>
-          <div class="proj-tech"><span>PHP</span><span>MySQL</span><span>Bootstrap</span></div>
-          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">Food Ordering System with complete standalone menus, cart functionality, and secure backend order management system.</p>
+        <div class="glass-card proj-card">
+          <div>
+            <div class="proj-num">01</div>
+            <div class="proj-title">Delivery Delight</div>
+            <div class="proj-tech"><span>PHP</span><span>MySQL</span><span>Bootstrap</span></div>
+            <p class="proj-desc">Food delivery operations pipeline supporting individual food items catalogs, structured session carts, and standalone internal transaction checking views.</p>
+          </div>
         </div>
       </div>
       <div class="col-md-6">
-        <div class="glass-card h-100">
-          <div class="proj-num">02</div>
-          <div class="proj-title">TechNest Blog</div>
-          <div class="proj-tech"><span>Python</span><span>Flask</span><span>SQLite</span></div>
-          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;margin-bottom:1rem;">Flask-based dynamic blogging ecosystem with complete CRUD operations, user session authentication, and rich text editors.</p>
-          <a href="https://github.com/jrpandya/python-flask-app" target="_blank" class="proj-link">View on GitHub →</a>
+        <div class="glass-card proj-card">
+          <div>
+            <div class="proj-num">02</div>
+            <div class="proj-title">TechNest Blog</div>
+            <div class="proj-tech"><span>Python</span><span>Flask</span><span>SQLite</span></div>
+            <p class="proj-desc">Dynamic content management site processing persistent user auth states, session tokens, complete CRUD blog feeds, and markdown text rendering blocks.</p>
+          </div>
+          <a href="https://github.com/jrpandya/python-flask-app" target="_blank" class="proj-link">View Project Code →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- EDUCATION + LANGUAGES -->
+  <!-- EDUCATION BLOCKS -->
   <section id="education" class="reveal">
     <div class="row g-4">
       <div class="col-lg-8">
         <h2 class="sec-title">Education</h2>
         <div class="sec-line"></div>
-        <div class="glass-card">
-          <div class="edu-item"><div class="edu-year">2025–27</div><div><div class="edu-degree">MCA — Master of Computer Applications</div><div class="edu-school">Dr. Subhash University</div><span class="edu-score">Sem 2 Completed · Pursuing</span></div></div>
+        <div class="glass-card edu-card">
+          <div class="edu-item">
+            <div class="edu-year">2025—27</div>
+            <div>
+              <div class="edu-degree">MCA — Master of Computer Applications</div>
+              <div class="edu-school">Dr. Subhash University</div>
+              <span class="edu-score">Sem 2 Completed · Ongoing</span>
+            </div>
+          </div>
           <hr class="edu-divider">
-          <div class="edu-item"><div class="edu-year">2023–25</div><div><div class="edu-degree">BCA — Bachelor of Computer Applications</div><div class="edu-school">Dr. Subhash University</div><span class="edu-score">CGPA: 8.92 / 10.0</span></div></div>
+          <div class="edu-item">
+            <div class="edu-year">2023—25</div>
+            <div>
+              <div class="edu-degree">BCA — Bachelor of Computer Applications</div>
+              <div class="edu-school">Dr. Subhash University</div>
+              <span class="edu-score">CGPA: 8.92 / 10.0</span>
+            </div>
+          </div>
           <hr class="edu-divider">
-          <div class="edu-item"><div class="edu-year">2022</div><div><div class="edu-degree">HSC — Higher Secondary</div><div class="edu-school">Sarswati School</div><span class="edu-score">71%</span></div></div>
+          <div class="edu-item">
+            <div class="edu-year">2022</div>
+            <div>
+              <div class="edu-degree">HSC — Higher Secondary School</div>
+              <div class="edu-school">Sarswati School</div>
+              <span class="edu-score">Score: 71%</span>
+            </div>
+          </div>
           <hr class="edu-divider">
-          <div class="edu-item"><div class="edu-year">2020</div><div><div class="edu-degree">SSC — Secondary School</div><div class="edu-school">Javiya Schooling System</div><span class="edu-score">76%</span></div></div>
+          <div class="edu-item">
+            <div class="edu-year">2020</div>
+            <div>
+              <div class="edu-degree">SSC — Secondary School</div>
+              <div class="edu-school">Javiya Schooling System</div>
+              <span class="edu-score">Score: 76%</span>
+            </div>
+          </div>
         </div>
       </div>
+      
+      <!-- LANGUAGES BLOCKS -->
       <div class="col-lg-4">
         <h2 class="sec-title">Languages</h2>
         <div class="sec-line"></div>
@@ -698,16 +626,40 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- GET IN TOUCH LAYOUTS -->
   <section id="contact" class="reveal">
     <h2 class="sec-title">Get In Touch</h2>
     <div class="sec-line"></div>
     <div class="row g-4 align-items-stretch">
       <div class="col-lg-5">
-        <a href="mailto:jaypandya806@gmail.com" class="contact-item"><div class="contact-icon">✉️</div><div><div class="contact-label">Email</div><div class="contact-value">jaypandya806@gmail.com</div></div></a>
-        <a href="tel:+917046480849" class="contact-item"><div class="contact-icon">📱</div><div><div class="contact-label">Phone</div><div class="contact-value">+91 7046480849</div></div></a>
-        <a href="https://www.linkedin.com/in/jay-pandya-933310301" target="_blank" class="contact-item"><div class="contact-icon">🔗</div><div><div class="contact-label">LinkedIn</div><div class="contact-value">jay-pandya-933310301</div></div></a>
-        <a href="https://maps.google.com/?q=Dhandhusar,junagadh" target="_blank" class="contact-item"><div class="contact-icon">📍</div><div><div class="contact-label">Location</div><div class="contact-value">Junagadh, Gujarat, India</div></div></a>
+        <a href="mailto:jaypandya806@gmail.com" class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">jaypandya806@gmail.com</div>
+          </div>
+        </a>
+        <a href="tel:+917046480849" class="contact-item">
+          <div class="contact-icon">📱</div>
+          <div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-value">+91 7046480849</div>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/jay-pandya-933310301" target="_blank" class="contact-item">
+          <div class="contact-icon">🔗</div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">jay-pandya-933310301</div>
+          </div>
+        </a>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Location</div>
+            <div class="contact-value">Junagadh, Gujarat, India</div>
+          </div>
+        </div>
       </div>
       <div class="col-lg-7">
         <div class="map-wrap">
@@ -719,61 +671,83 @@
 
 </main>
 
+<!-- SYSTEM FOOTERS -->
 <footer>
-  <p>© 2026 <span>Jay Pandya</span> — Built with clean code & passion for Odoo</p>
+  <div class="container">
+    <p>© 2026 <span>Jay Pandya</span> — Designed with clean modular code paradigms.</p>
+  </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  // ── Theme Toggle ──
   const html = document.documentElement;
   const themeBtn = document.getElementById('themeToggle');
   const themeIcon = document.getElementById('themeIcon');
-  const saved = localStorage.getItem('theme') || 'dark';
-  html.setAttribute('data-theme', saved);
-  themeIcon.textContent = saved === 'dark' ? '🌙' : '☀️';
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  
+  html.setAttribute('data-theme', savedTheme);
+  themeIcon.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
 
   themeBtn.addEventListener('click', () => {
-    const cur = html.getAttribute('data-theme');
-    const next = cur === 'dark' ? 'light' : 'dark';
-    html.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-    themeIcon.textContent = next === 'dark' ? '🌙' : '☀️';
+    const activeTheme = html.getAttribute('data-theme');
+    const targetedTheme = activeTheme === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', targetedTheme);
+    localStorage.setItem('theme', targetedTheme);
+    themeIcon.textContent = targetedTheme === 'dark' ? '🌙' : '☀️';
   });
 
-  // ── Typed Text ──
-  const roles = ['Python Developer','Odoo ERP Expert','Django Developer','Backend Engineer'];
-  let rIdx=0, cIdx=0, del=false;
-  const tel = document.getElementById('typed-text');
-  function type() {
-    const cur = roles[rIdx];
-    if (!del) { tel.textContent = cur.slice(0,++cIdx); if(cIdx===cur.length){del=true;setTimeout(type,1800);return;} }
-    else { tel.textContent = cur.slice(0,--cIdx); if(cIdx===0){del=false;rIdx=(rIdx+1)%roles.length;} }
-    setTimeout(type, del ? 55 : 85);
+  const textTracks = ['Python Developer','Odoo ERP Expert','Django Developer','Backend Engineer'];
+  let trackIdx = 0, charIdx = 0, statusErase = false;
+  const containerElement = document.getElementById('typed-text');
+  
+  function triggerTypingCycle() {
+    const trackString = textTracks[trackIdx];
+    if (!statusErase) { 
+      containerElement.textContent = trackString.slice(0, ++charIdx); 
+      if (charIdx === trackString.length) { 
+        statusErase = true; 
+        setTimeout(triggerTypingCycle, 2000); 
+        return; 
+      } 
+    } else { 
+      containerElement.textContent = trackString.slice(0, --charIdx); 
+      if (charIdx === 0) { 
+        statusErase = false; 
+        trackIdx = (trackIdx + 1) % textTracks.length; 
+      } 
+    }
+    setTimeout(triggerTypingCycle, statusErase ? 40 : 80);
   }
-  setTimeout(type, 1000);
+  setTimeout(triggerTypingCycle, 800);
 
-  // ── Scroll Reveal ──
-  const revEls = document.querySelectorAll('.reveal');
-  function reveal(){ revEls.forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight-60) el.classList.add('active'); }); }
-  window.addEventListener('scroll', reveal); reveal();
+  const structuralElements = document.querySelectorAll('.reveal');
+  function runViewportInspection(){ 
+    structuralElements.forEach(item => { 
+      if(item.getBoundingClientRect().top < window.innerHeight - 50) item.classList.add('active'); 
+    }); 
+  }
+  window.addEventListener('scroll', runViewportInspection); 
+  runViewportInspection();
 
-  // ── Smooth Scroll ──
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const t = document.querySelector(a.getAttribute('href'));
-      if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'}); }
-      const nm=document.getElementById('navMenu');
-      if(nm.classList.contains('show')) bootstrap.Collapse.getInstance(nm)?.hide();
+  document.querySelectorAll('a[href^="#"]').forEach(anchorNode => {
+    anchorNode.addEventListener('click', eventInstance => {
+      const targetedNode = document.querySelector(anchorNode.getAttribute('href'));
+      if(targetedNode){ 
+        eventInstance.preventDefault(); 
+        const targetOffset = targetedNode.getBoundingClientRect().top + window.scrollY - 85;
+        window.scrollTo({ top: targetOffset, behavior: 'smooth' });
+      }
+      const activeNavDropdown = document.getElementById('navMenu');
+      if(activeNavDropdown.classList.contains('show')) {
+        bootstrap.Collapse.getInstance(activeNavDropdown)?.hide();
+      }
     });
   });
 
-  // ── Back To Top ──
-  const btt = document.getElementById('backToTop');
-  window.addEventListener('scroll', () => {
-    btt.style.display = scrollY > 250 ? 'flex' : 'none';
-  });
-  btt.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+  const bttButton = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => { bttButton.style.display = window.scrollY > 300 ? 'flex' : 'none'; });
+  bttButton.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
 </script>
 </body>
 </html>
+
