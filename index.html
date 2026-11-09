@@ -9,13 +9,33 @@
     content="Portfolio of Jay Pandya — Python &amp; Odoo Developer building reliable, maintainable business solutions with Django, REST APIs and PostgreSQL.">
   <meta name="theme-color" content="#06080f">
 
+  <!-- Cache Control (Forces fresh load on live hosting / GitHub Pages) -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <!-- Immediate Theme Initializer to prevent flash of wrong theme -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('portfolio-theme');
+        if (!saved) {
+          saved = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        document.documentElement.setAttribute('data-theme', saved);
+      } catch (e) { }
+    })();
+  </script>
+
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2306080f'/%3E%3Ctext x='16' y='21' font-family='sans-serif' font-weight='800' font-size='14' text-anchor='middle' fill='%2300f5a0'%3EJP%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2306080f'/%3E%3Ctext x='16' y='21' font-family='sans-serif' font-weight='800' font-size='14' text-anchor='middle' fill='%2300f5a0'%3EJP%3C/text%3E%3C/svg%3E">
 
   <!-- Open Graph / Social Meta -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Jay Pandya — Python &amp; Odoo Developer">
-  <meta property="og:description" content="Python &amp; Odoo developer building reliable, maintainable business solutions with Django, REST APIs and PostgreSQL.">
+  <meta property="og:description"
+    content="Python &amp; Odoo developer building reliable, maintainable business solutions with Django, REST APIs and PostgreSQL.">
   <meta property="og:image" content="img/my.jpg">
 
   <!-- Google Fonts -->
@@ -27,15 +47,25 @@
 
   <style>
     /* ==========================================================================
-       CSS RESET & DESIGN SYSTEM TOKENS
+       CSS RESET & DESIGN SYSTEM TOKENS (LIGHT & DARK DUAL THEME)
        ========================================================================== */
-    :root {
+    :root,
+    [data-theme="dark"] {
       --bg: #06080f;
       --bg-alt: #0a0e1a;
       --bg-card: rgba(13, 18, 33, 0.65);
       --bg-card-hover: rgba(18, 25, 48, 0.85);
+      --nav-bg: rgba(10, 14, 26, 0.72);
       --border: rgba(255, 255, 255, 0.08);
       --border-bright: rgba(255, 255, 255, 0.18);
+      --card-glass: rgba(255, 255, 255, 0.04);
+      --card-glass-hover: rgba(255, 255, 255, 0.08);
+      --avatar-bg: #0d1221;
+      --terminal-bg: rgba(0, 0, 0, 0.45);
+      --terminal-border: rgba(0, 242, 254, 0.22);
+      --hobby-bg: rgba(0, 0, 0, 0.4);
+      --toast-bg: rgba(10, 14, 26, 0.95);
+      --footer-bg: linear-gradient(180deg, rgba(10, 14, 26, 0.75) 0%, rgba(6, 8, 15, 0.98) 100%);
 
       --neon-cyan: #00f2fe;
       --neon-green: #00f5a0;
@@ -50,6 +80,7 @@
       --grad-glow: linear-gradient(135deg, rgba(0, 245, 160, 0.15), rgba(0, 242, 254, 0.15), rgba(139, 92, 246, 0.15));
 
       --text-main: #f8fafc;
+      --text-heading: #ffffff;
       --text-muted: #94a3b8;
       --text-dim: #64748b;
 
@@ -68,6 +99,45 @@
       --shadow-glow-violet: 0 0 35px rgba(139, 92, 246, 0.22);
     }
 
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg-alt: #f1f5f9;
+      --bg-card: rgba(255, 255, 255, 0.88);
+      --bg-card-hover: rgba(255, 255, 255, 0.98);
+      --nav-bg: rgba(255, 255, 255, 0.85);
+      --border: rgba(15, 23, 42, 0.08);
+      --border-bright: rgba(15, 23, 42, 0.16);
+      --card-glass: rgba(15, 23, 42, 0.04);
+      --card-glass-hover: rgba(15, 23, 42, 0.08);
+      --avatar-bg: #e2e8f0;
+      --terminal-bg: rgba(255, 255, 255, 0.92);
+      --terminal-border: rgba(2, 132, 199, 0.3);
+      --hobby-bg: rgba(255, 255, 255, 0.85);
+      --toast-bg: rgba(15, 23, 42, 0.95);
+      --footer-bg: linear-gradient(180deg, rgba(241, 245, 249, 0.92) 0%, rgba(226, 232, 240, 0.98) 100%);
+
+      --neon-cyan: #0284c7;
+      --neon-green: #059669;
+      --neon-violet: #7c3aed;
+      --neon-purple: #6d28d9;
+      --neon-pink: #db2777;
+      --neon-amber: #d97706;
+
+      --grad-primary: linear-gradient(135deg, #059669 0%, #0284c7 50%, #7c3aed 100%);
+      --grad-text: linear-gradient(135deg, #0f172a 20%, #334155 60%, #475569 100%);
+      --grad-accent: linear-gradient(135deg, #059669 0%, #0284c7 100%);
+      --grad-glow: linear-gradient(135deg, rgba(5, 150, 105, 0.12), rgba(2, 132, 199, 0.12), rgba(124, 58, 237, 0.12));
+
+      --text-main: #1e293b;
+      --text-heading: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #64748b;
+
+      --shadow-card: 0 16px 40px -12px rgba(15, 23, 42, 0.07);
+      --shadow-glow: 0 0 35px rgba(5, 150, 105, 0.14);
+      --shadow-glow-violet: 0 0 35px rgba(124, 58, 237, 0.14);
+    }
+
     *,
     *::before,
     *::after {
@@ -79,7 +149,6 @@
     html {
       scroll-behavior: smooth;
       scroll-padding-top: 90px;
-      color-scheme: dark;
     }
 
     body {
@@ -93,6 +162,7 @@
       selection-color: #000;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     ::selection {
@@ -222,60 +292,31 @@
       }
     }
 
-    /* Interactive Cursor Glow Follower */
-    #cursor-glow {
-      position: fixed;
-      width: 480px;
-      height: 480px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 245, 160, 0.12), rgba(139, 92, 246, 0.08) 40%, transparent 70%);
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      z-index: 1;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      will-change: left, top;
-    }
-
-    /* Custom Cursor Ring & Dot */
-    .custom-cursor-dot,
-    .custom-cursor-ring {
+    /* Simple Sleek Purple Cursor Dot */
+    #cursor-dot {
       position: fixed;
       top: 0;
       left: 0;
-      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
+      background: #8b5cf6;
+      box-shadow: 0 0 12px #8b5cf6, 0 0 4px #a78bfa;
       pointer-events: none;
-      z-index: 10000;
-      transition: opacity 0.3s ease;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.12s ease-out, background-color 0.2s ease, opacity 0.25s ease;
+      opacity: 0;
     }
 
-    .custom-cursor-dot {
-      width: 7px;
-      height: 7px;
-      background-color: var(--neon-green);
-      box-shadow: 0 0 10px var(--neon-green);
+    body.cursor-hover #cursor-dot {
+      transform: translate(-50%, -50%) scale(1.6);
+      background: #a78bfa;
+      box-shadow: 0 0 20px #8b5cf6, 0 0 8px #c4b5fd;
     }
 
-    .custom-cursor-ring {
-      width: 38px;
-      height: 38px;
-      border: 1.5px solid rgba(0, 245, 160, 0.45);
-      transition: width 0.25s, height 0.25s, border-color 0.25s, transform 0.15s ease-out;
-    }
-
-    body.cursor-hover .custom-cursor-ring {
-      width: 58px;
-      height: 58px;
-      border-color: var(--neon-cyan);
-      background-color: rgba(0, 242, 254, 0.06);
-    }
-
-    @media (pointer: coarse) {
-
-      .custom-cursor-dot,
-      .custom-cursor-ring,
-      #cursor-glow {
+    @media (pointer: coarse), (max-width: 992px) {
+      #cursor-dot {
         display: none !important;
       }
     }
@@ -335,7 +376,7 @@
       font-weight: 800;
       letter-spacing: -1.5px;
       line-height: 1.12;
-      color: #ffffff;
+      color: var(--text-heading);
     }
 
     h2 em {
@@ -347,7 +388,7 @@
     }
 
     /* ==========================================================================
-       NAVIGATION BAR
+       NAVIGATION BAR & THEME TOGGLE
        ========================================================================== */
     header {
       position: fixed;
@@ -367,12 +408,12 @@
       align-items: center;
       gap: 0.25rem;
       padding: 0.4rem 0.5rem;
-      background: rgba(10, 14, 26, 0.72);
+      background: var(--nav-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--border-bright);
       border-radius: var(--radius-full);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.12);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       max-width: 96vw;
       overflow-x: auto;
@@ -396,8 +437,8 @@
     }
 
     nav.nav-pill a:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-heading);
+      background: var(--card-glass);
     }
 
     nav.nav-pill a.on {
@@ -405,6 +446,11 @@
       color: #06080f;
       font-weight: 700;
       box-shadow: 0 0 18px rgba(0, 245, 160, 0.4);
+    }
+
+    [data-theme="light"] nav.nav-pill a.on {
+      color: #ffffff;
+      box-shadow: 0 0 18px rgba(5, 150, 105, 0.4);
     }
 
     nav.nav-pill a.resume-pill {
@@ -424,6 +470,94 @@
       box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
     }
 
+    /* Modern Theme Switch Toggle Button */
+    .theme-toggle-btn {
+      background: var(--card-glass);
+      border: 1px solid var(--border-bright);
+      color: var(--text-heading);
+      border-radius: var(--radius-full);
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-left: 0.35rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--card-glass-hover);
+      border-color: var(--neon-cyan);
+      color: var(--neon-cyan);
+      transform: scale(1.1) rotate(15deg);
+      box-shadow: 0 0 18px rgba(0, 242, 254, 0.35);
+    }
+
+    /* Icon visibility toggle */
+    [data-theme="dark"] .theme-icon-moon {
+      display: none;
+    }
+
+    [data-theme="dark"] .theme-icon-sun {
+      display: block;
+      color: #fbbf24;
+    }
+
+    [data-theme="light"] .theme-icon-sun {
+      display: none;
+    }
+
+    [data-theme="light"] .theme-icon-moon {
+      display: block;
+      color: #334155;
+    }
+
+    /* Modern Theme Switch Toggle Button */
+    .theme-toggle-btn {
+      background: var(--card-glass);
+      border: 1px solid var(--border-bright);
+      color: var(--text-heading);
+      border-radius: var(--radius-full);
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-left: 0.35rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--card-glass-hover);
+      border-color: var(--neon-cyan);
+      color: var(--neon-cyan);
+      transform: scale(1.1) rotate(15deg);
+      box-shadow: 0 0 18px rgba(0, 242, 254, 0.35);
+    }
+
+    /* Icon visibility toggle */
+    [data-theme="dark"] .theme-icon-moon {
+      display: none;
+    }
+    [data-theme="dark"] .theme-icon-sun {
+      display: block;
+      color: #fbbf24;
+    }
+
+    [data-theme="light"] .theme-icon-sun {
+      display: none;
+    }
+    [data-theme="light"] .theme-icon-moon {
+      display: block;
+      color: #334155;
+    }
+
     /* Mobile Nav Toggle */
     .mobile-nav-toggle {
       display: none;
@@ -431,14 +565,14 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background: rgba(10, 14, 26, 0.85);
+      background: var(--nav-bg);
       backdrop-filter: blur(15px);
       border: 1px solid var(--border-bright);
-      color: #ffffff;
+      color: var(--text-heading);
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     }
 
     /* ==========================================================================
@@ -514,7 +648,7 @@
       font-weight: 900;
       line-height: 0.98;
       letter-spacing: -3.5px;
-      color: #ffffff;
+      color: var(--text-heading);
       margin-bottom: 1.4rem;
     }
 
@@ -546,14 +680,14 @@
       align-items: center;
       gap: 0.5rem;
       padding: 0.6rem 1.2rem;
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(0, 242, 254, 0.22);
+      background: var(--terminal-bg);
+      border: 1px solid var(--terminal-border);
       border-radius: var(--radius-md);
       font-family: var(--font-mono);
       font-size: 1.15rem;
       color: var(--neon-cyan);
       margin-bottom: 1.5rem;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
     }
 
     .role-terminal .prompt-sym {
@@ -618,9 +752,18 @@
       border: none;
     }
 
+    [data-theme="light"] .btn-epic.btn-primary {
+      color: #ffffff;
+      box-shadow: 0 10px 30px rgba(5, 150, 105, 0.3);
+    }
+
     .btn-epic.btn-primary:hover {
       transform: translateY(-4px) scale(1.02);
       box-shadow: 0 16px 40px rgba(0, 245, 160, 0.45);
+    }
+
+    [data-theme="light"] .btn-epic.btn-primary:hover {
+      box-shadow: 0 16px 40px rgba(5, 150, 105, 0.45);
     }
 
     .btn-epic.btn-primary .arrow {
@@ -632,14 +775,14 @@
     }
 
     .btn-epic.btn-glass {
-      background: rgba(255, 255, 255, 0.04);
+      background: var(--card-glass);
       border: 1px solid var(--border-bright);
-      color: #ffffff;
+      color: var(--text-heading);
       backdrop-filter: blur(10px);
     }
 
     .btn-epic.btn-glass:hover {
-      background: rgba(255, 255, 255, 0.09);
+      background: var(--card-glass-hover);
       border-color: var(--neon-cyan);
       color: var(--neon-cyan);
       transform: translateY(-4px);
@@ -667,7 +810,7 @@
       aspect-ratio: 1;
       border-radius: var(--radius-xl);
       padding: 8px;
-      background: rgba(255, 255, 255, 0.03);
+      background: var(--card-glass);
       border: 1px solid var(--border);
       box-shadow: var(--shadow-card), 0 0 60px rgba(124, 58, 237, 0.18);
       transform-style: preserve-3d;
@@ -701,7 +844,7 @@
       height: 100%;
       border-radius: calc(var(--radius-xl) - 4px);
       overflow: hidden;
-      background: #0d1221;
+      background: var(--avatar-bg);
       z-index: 1;
     }
 
@@ -797,7 +940,7 @@
       font-size: 1.7rem;
       font-weight: 700;
       letter-spacing: -0.5px;
-      color: rgba(255, 255, 255, 0.4);
+      color: var(--text-dim);
       white-space: nowrap;
       transition: color 0.3s ease, transform 0.3s ease;
     }
@@ -808,7 +951,7 @@
     }
 
     .marquee-item.highlight {
-      color: #ffffff;
+      color: var(--text-heading);
       -webkit-text-stroke: 0;
     }
 
@@ -831,7 +974,7 @@
       padding: 2.2rem;
       overflow: hidden;
       box-shadow: var(--shadow-card);
-      transition: border-color 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+      transition: border-color 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, background 0.35s ease;
     }
 
     .card-spotlight::before {
@@ -871,14 +1014,14 @@
     }
 
     .about-text-lead {
-      color: #cbd5e1;
+      color: var(--text-muted);
       font-size: 1.12rem;
       line-height: 1.8;
       margin-bottom: 1.4rem;
     }
 
     .about-text-lead b {
-      color: #ffffff;
+      color: var(--text-heading);
       font-weight: 600;
     }
 
@@ -894,7 +1037,7 @@
       font-size: 0.8rem;
       padding: 0.35rem 0.85rem;
       border-radius: var(--radius-full);
-      background: rgba(255, 255, 255, 0.04);
+      background: var(--card-glass);
       border: 1px solid var(--border);
       color: var(--neon-cyan);
     }
@@ -903,7 +1046,7 @@
     .hobby-music-card {
       margin-top: 1.8rem;
       padding: 1.2rem 1.4rem;
-      background: rgba(0, 0, 0, 0.4);
+      background: var(--hobby-bg);
       border: 1px solid rgba(236, 72, 153, 0.25);
       border-radius: var(--radius-md);
       display: flex;
@@ -913,6 +1056,7 @@
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
+
     .hobby-music-card:hover {
       border-color: rgba(236, 72, 153, 0.55);
       transform: translateY(-3px);
@@ -947,7 +1091,7 @@
 
     .music-title-wrap strong {
       font-size: 0.95rem;
-      color: #ffffff;
+      color: var(--text-heading);
     }
 
     .sound-equalizer {
@@ -1025,7 +1169,7 @@
       width: 44px;
       height: 44px;
       border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.04);
+      background: var(--card-glass);
       border: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -1041,7 +1185,7 @@
       font-weight: 800;
       line-height: 1;
       letter-spacing: -2px;
-      color: #ffffff;
+      color: var(--text-heading);
       background: var(--grad-primary);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -1092,7 +1236,7 @@
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      background: #06080f;
+      background: var(--bg);
       border: 3px solid var(--neon-green);
       box-shadow: 0 0 16px var(--neon-green);
       display: flex;
@@ -1134,7 +1278,7 @@
       font-family: var(--font-display);
       font-size: 1.55rem;
       font-weight: 700;
-      color: #ffffff;
+      color: var(--text-heading);
       margin-bottom: 0.2rem;
     }
 
@@ -1152,7 +1296,7 @@
       font-size: 0.78rem;
       padding: 0.35rem 0.85rem;
       border-radius: var(--radius-full);
-      background: rgba(255, 255, 255, 0.04);
+      background: var(--card-glass);
       border: 1px solid var(--border);
       color: var(--text-muted);
       white-space: nowrap;
@@ -1212,7 +1356,7 @@
 
     .skill-card {
       position: relative;
-      background: rgba(13, 18, 33, 0.55);
+      background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       padding: 1.2rem 1.4rem;
@@ -1239,7 +1383,7 @@
       width: 40px;
       height: 40px;
       border-radius: var(--radius-sm);
-      background: rgba(255, 255, 255, 0.04);
+      background: var(--card-glass);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1256,11 +1400,11 @@
       font-family: var(--font-body);
       font-size: 1rem;
       font-weight: 600;
-      color: #ffffff;
+      color: var(--text-heading);
     }
 
     .skill-card.featured .skill-name {
-      color: #ffffff;
+      color: var(--text-heading);
     }
 
     /* ==========================================================================
@@ -1328,14 +1472,14 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.15);
+      background: var(--border-bright);
     }
 
     .project-num {
       font-family: var(--font-mono);
       font-size: 2.2rem;
       font-weight: 800;
-      color: rgba(255, 255, 255, 0.08);
+      color: var(--border-bright);
       line-height: 1;
       transition: color 0.3s ease;
     }
@@ -1349,7 +1493,7 @@
       font-family: var(--font-display);
       font-size: 1.5rem;
       font-weight: 700;
-      color: #ffffff;
+      color: var(--text-heading);
       margin-bottom: 0.8rem;
     }
 
@@ -1433,7 +1577,7 @@
       font-family: var(--font-display);
       font-size: 1.18rem;
       font-weight: 700;
-      color: #ffffff;
+      color: var(--text-heading);
       margin-bottom: 0.2rem;
     }
 
@@ -1476,7 +1620,7 @@
       font-family: var(--font-body);
       font-size: 1.05rem;
       font-weight: 600;
-      color: #ffffff;
+      color: var(--text-heading);
     }
 
     .lang-level {
@@ -1559,7 +1703,7 @@
     .contact-value {
       font-size: 0.92rem;
       font-weight: 600;
-      color: #ffffff;
+      color: var(--text-heading);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -1567,7 +1711,7 @@
     }
 
     .copy-btn-mini {
-      background: rgba(255, 255, 255, 0.04);
+      background: var(--card-glass);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
       color: var(--text-muted);
@@ -1592,9 +1736,9 @@
       position: fixed;
       bottom: 30px;
       right: 30px;
-      background: rgba(10, 14, 26, 0.95);
+      background: var(--toast-bg);
       border: 1px solid var(--neon-green);
-      color: #ffffff;
+      color: var(--text-heading);
       padding: 0.8rem 1.4rem;
       border-radius: var(--radius-md);
       font-family: var(--font-mono);
@@ -1624,7 +1768,7 @@
       border-top: 1px solid var(--border);
       padding: 4.5rem 1.8rem 3.5rem;
       text-align: center;
-      background: linear-gradient(180deg, rgba(10, 14, 26, 0.75) 0%, rgba(6, 8, 15, 0.98) 100%);
+      background: var(--footer-bg);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
     }
@@ -1644,9 +1788,9 @@
       gap: 0.75rem;
       padding: 0.45rem 1.2rem;
       border-radius: var(--radius-full);
-      background: rgba(255, 255, 255, 0.03);
+      background: var(--card-glass);
       border: 1px solid var(--border);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
 
     .footer-logo {
@@ -1667,7 +1811,7 @@
       font-family: var(--font-display);
       font-size: 1.15rem;
       font-weight: 700;
-      color: #ffffff;
+      color: var(--text-heading);
       letter-spacing: -0.3px;
     }
 
@@ -1690,7 +1834,7 @@
       width: 42px;
       height: 42px;
       border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.03);
+      background: var(--card-glass);
       border: 1px solid var(--border);
       color: var(--text-muted);
       display: inline-flex;
@@ -1762,17 +1906,17 @@
       width: 46px;
       height: 46px;
       border-radius: 50%;
-      background: rgba(10, 14, 26, 0.85);
+      background: var(--nav-bg);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--border-bright);
-      color: #ffffff;
+      color: var(--text-heading);
       cursor: pointer;
       opacity: 0;
       pointer-events: none;
       transform: translateY(16px);
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
 
     .back-to-top.visible {
@@ -1805,13 +1949,13 @@
     }
 
     /* ==========================================================================
-       RESPONSIVE DESIGN (MEDIA QUERIES)
+       ADVANCED RESPONSIVE DESIGN (TABLETS, MOBILES & SMALL DEVICES)
        ========================================================================== */
     @media (max-width: 992px) {
       .hero-grid {
         grid-template-columns: 1fr;
         text-align: center;
-        gap: 3rem;
+        gap: 2.8rem;
       }
 
       .hero-actions {
@@ -1829,56 +1973,450 @@
     }
 
     @media (max-width: 768px) {
+      .wrap {
+        padding: 0 1.25rem;
+      }
+
       section {
-        padding: 5rem 0;
+        padding: 4.2rem 0;
       }
 
-      .hero-name {
-        font-size: 3.4rem;
-        letter-spacing: -2px;
-      }
-
-      .card-spotlight {
-        padding: 1.6rem;
-      }
-
-      .timeline-container {
-        padding-left: 2rem;
-      }
-
-      .timeline-node {
-        left: -2rem;
-      }
-
-      .footer-content {
-        flex-direction: column;
+      .sec-header {
+        margin-bottom: 2.2rem;
         text-align: center;
       }
 
-      .edu-item {
-        grid-template-columns: 1fr;
-        gap: 0.3rem;
+      .sec-tag {
+        font-size: 0.74rem;
+        padding: 0.3rem 0.8rem;
+        margin-bottom: 0.8rem;
       }
-    }
 
-    @media (max-width: 520px) {
+      h2 {
+        font-size: clamp(2rem, 7vw, 2.7rem);
+        letter-spacing: -1px;
+      }
+
+      /* Compact Floating Navigation for Touch */
+      header {
+        top: 10px;
+        padding: 0 0.5rem;
+      }
+
       nav.nav-pill {
-        padding: 0.3rem 0.4rem;
-        gap: 0.15rem;
+        max-width: calc(100vw - 1rem);
+        padding: 0.32rem 0.45rem;
+        gap: 0.18rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
       }
 
       nav.nav-pill a {
         font-size: 0.72rem;
-        padding: 0.35rem 0.65rem;
+        padding: 0.38rem 0.65rem;
+      }
+
+      nav.nav-pill a.resume-pill {
+        font-size: 0.72rem;
+        padding: 0.38rem 0.65rem;
+      }
+
+      .theme-toggle-btn {
+        width: 32px;
+        height: 32px;
+        margin-left: 0.15rem;
+      }
+
+      /* Hero Section Polish */
+      .hero {
+        min-height: auto;
+        padding-top: 5.5rem;
+        padding-bottom: 3.5rem;
+      }
+
+      .hero-grid {
+        gap: 2.2rem;
+        text-align: center;
+      }
+
+      .status-badge {
+        margin: 0 auto 1.3rem auto;
+        font-size: 0.78rem;
+        padding: 0.38rem 0.95rem;
+      }
+
+      .hero-name {
+        font-size: clamp(2.4rem, 11vw, 3.4rem);
+        letter-spacing: -1.5px;
+        line-height: 1.05;
+        margin-bottom: 1rem;
+        word-break: break-word;
+      }
+
+      .role-terminal {
+        font-size: 0.92rem;
+        padding: 0.45rem 0.95rem;
+        margin: 0 auto 1.2rem auto;
+      }
+
+      .hero-lead {
+        font-size: 0.98rem;
+        line-height: 1.65;
+        margin: 0 auto 1.6rem auto;
+        max-width: 100%;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
       }
 
       .hero-actions .btn-epic {
         width: 100%;
         justify-content: center;
+        padding: 0.85rem 1.4rem;
+        font-size: 0.95rem;
+      }
+
+      .avatar-tilt-box {
+        width: min(280px, 76vw);
+        aspect-ratio: 1;
+        margin: 0 auto;
+        border-radius: 24px;
+        padding: 6px;
+      }
+
+      .avatar-inner {
+        border-radius: 20px;
+      }
+
+      .avatar-glow-ring {
+        border-radius: 28px;
+      }
+
+      /* Tech Marquee */
+      .marquee-wrapper {
+        padding: 0.9rem 0;
+      }
+
+      .marquee-wrapper::before,
+      .marquee-wrapper::after {
+        width: 50px;
+      }
+
+      .marquee-item {
+        font-size: 1.15rem;
+        gap: 0.5rem;
+      }
+
+      .marquee-track {
+        gap: 2rem;
+      }
+
+      /* Bento About Grid & 2x2 Stats */
+      .card-spotlight {
+        padding: 1.5rem 1.2rem;
+        border-radius: 18px;
+      }
+
+      .about-text-lead {
+        font-size: 0.98rem;
+        line-height: 1.7;
+        margin-bottom: 1.1rem;
+      }
+
+      .strength-badge-list {
+        gap: 0.45rem;
+      }
+
+      .strength-pill {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.7rem;
+      }
+
+      .hobby-music-card {
+        margin-top: 1.3rem;
+        padding: 0.85rem 1rem;
+        gap: 0.6rem;
+      }
+
+      .music-info {
+        gap: 0.65rem;
+      }
+
+      .music-icon-disc {
+        width: 34px;
+        height: 34px;
+      }
+
+      .music-title-wrap strong {
+        font-size: 0.88rem;
+      }
+
+      .bento-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.85rem;
+      }
+
+      .stat-box {
+        padding: 1.1rem 0.95rem;
+      }
+
+      .stat-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+        letter-spacing: -1px;
+      }
+
+      .stat-label {
+        font-size: 0.68rem;
+        letter-spacing: 1px;
+      }
+
+      /* Experience Timeline */
+      .timeline-container {
+        padding-left: 1.8rem;
+        margin-top: 0.5rem;
+      }
+
+      .timeline-laser {
+        left: 6px;
+      }
+
+      .timeline-node {
+        left: -1.8rem;
+        top: 1.5rem;
+        width: 18px;
+        height: 18px;
+      }
+
+      .experience-card {
+        margin-bottom: 1.8rem;
+      }
+
+      .exp-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.35rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .exp-role {
+        font-size: 1.25rem;
+      }
+
+      .exp-company {
+        font-size: 0.88rem;
+      }
+
+      .exp-date-pill {
+        font-size: 0.72rem;
+        padding: 0.25rem 0.65rem;
+      }
+
+      .exp-list li {
+        font-size: 0.92rem;
+        line-height: 1.6;
+        padding-left: 1.3rem;
+      }
+
+      /* Skills App Grid (2 Columns on Mobile) */
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+      }
+
+      .skill-card {
+        padding: 0.85rem 0.9rem;
+        gap: 0.65rem;
+        border-radius: 12px;
+      }
+
+      .skill-icon-wrap {
+        width: 34px;
+        height: 34px;
+        font-size: 1.05rem;
+      }
+
+      .skill-name {
+        font-size: 0.85rem;
+      }
+
+      /* Projects */
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.4rem;
+      }
+
+      .project-card {
+        min-height: auto;
+        padding: 1.5rem 1.25rem;
+      }
+
+      .project-title {
+        font-size: 1.25rem;
+        margin-bottom: 0.55rem;
+      }
+
+      .project-desc {
+        font-size: 0.92rem;
+        line-height: 1.65;
+        margin-bottom: 1.2rem;
+      }
+
+      .project-tags {
+        gap: 0.4rem;
+        margin-bottom: 1rem;
+      }
+
+      .project-tag {
+        font-size: 0.72rem;
+        padding: 0.25rem 0.65rem;
+      }
+
+      .project-link {
+        font-size: 0.84rem;
+      }
+
+      /* Education & Languages */
+      .edu-item {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+        padding: 1.1rem 0;
+      }
+
+      .edu-year {
+        font-size: 0.8rem;
+      }
+
+      .edu-degree {
+        font-size: 1.08rem;
+      }
+
+      .edu-school {
+        font-size: 0.88rem;
+      }
+
+      .edu-grade {
+        font-size: 0.78rem;
+      }
+
+      .lang-item {
+        padding: 0.85rem 0;
+      }
+
+      .lang-name {
+        font-size: 0.95rem;
+      }
+
+      .lang-level {
+        font-size: 0.74rem;
+        padding: 0.2rem 0.55rem;
+      }
+
+      /* Contact Section */
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+      }
+
+      .contact-card {
+        padding: 0.95rem 1.1rem;
+        gap: 0.85rem;
+      }
+
+      .contact-icon-box {
+        width: 42px;
+        height: 42px;
+        font-size: 1.15rem;
+      }
+
+      .contact-label {
+        font-size: 0.68rem;
+        margin-bottom: 0.15rem;
+      }
+
+      .contact-value {
+        font-size: 0.84rem;
+      }
+
+      .copy-btn-mini {
+        padding: 5px 7px;
+      }
+
+      #toast-msg {
+        left: 16px;
+        right: 16px;
+        bottom: 20px;
+        justify-content: center;
+        text-align: center;
+      }
+
+      /* Footer & Back to top */
+      footer {
+        padding: 3.5rem 1.2rem 2.5rem;
+      }
+
+      .footer-container {
+        gap: 1.3rem;
+      }
+
+      .footer-tagline {
+        font-size: 0.88rem;
+        line-height: 1.55;
+      }
+
+      .footer-social-row {
+        flex-wrap: wrap;
+        gap: 0.55rem;
+      }
+
+      .footer-social-btn {
+        width: 38px;
+        height: 38px;
+      }
+
+      .footer-links-pill {
+        gap: 0.25rem;
+      }
+
+      .footer-links-pill a {
+        font-size: 0.72rem;
+        padding: 0.28rem 0.6rem;
+      }
+
+      .back-to-top {
+        bottom: 18px;
+        right: 18px;
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .hero-name {
+        font-size: 2.15rem;
       }
 
       .bento-stats-grid {
         grid-template-columns: 1fr;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-value {
+        font-size: 0.78rem;
       }
     }
 
@@ -1913,10 +2451,8 @@
     <div class="ambient-orb ambient-orb-3"></div>
   </div>
 
-  <!-- Interactive Cursor Glow Follower -->
-  <div id="cursor-glow"></div>
-  <div class="custom-cursor-dot" id="cursor-dot"></div>
-  <div class="custom-cursor-ring" id="cursor-ring"></div>
+  <!-- Simple Purple Cursor Dot Follower -->
+  <div id="cursor-dot"></div>
 
   <!-- Toast Notification -->
   <div id="toast-msg">
@@ -1944,6 +2480,24 @@
           <path d="M7 17l9.2-9.2M17 17V7H7" />
         </svg>
       </a>
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Light / Dark Theme" title="Toggle Theme">
+        <svg class="theme-icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
     </nav>
   </header>
 
@@ -2381,9 +2935,6 @@
                 <span class="project-tag">Python</span>
                 <span class="project-tag">Flask</span>
               </div>
-              <a href="https://github.com/jrpandya/python-flask-app" target="_blank" class="project-link">
-                View code <span>→</span>
-              </a>
             </div>
           </div>
 
@@ -2589,26 +3140,86 @@
       </div>
 
       <p class="footer-tagline">
-        Python &amp; Odoo Developer building reliable, maintainable business solutions with Django, REST APIs and PostgreSQL.
+        Python &amp; Odoo Developer building reliable, maintainable business solutions with Django, REST APIs and
+        PostgreSQL.
       </p>
 
       <!-- Centered Social Buttons -->
       <div class="footer-social-row">
         <a href="https://github.com/jrpandya" target="_blank" class="footer-social-btn" title="GitHub">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+          </svg>
         </a>
-        <a href="https://www.linkedin.com/in/jay-pandya-933310301" target="_blank" class="footer-social-btn" title="LinkedIn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        <a href="https://www.linkedin.com/in/jay-pandya-933310301" target="_blank" class="footer-social-btn"
+          title="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+          </svg>
         </a>
         <a href="mailto:jaypandya806@gmail.com" class="footer-social-btn" title="Email">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
         </a>
         <a href="tel:+917046480849" class="footer-social-btn" title="Phone">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
         </a>
         <a href="resume/Jay_Resume.pdf" target="_blank" class="footer-social-btn" title="Resume">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" />
+            <polyline points="10 9 9 9 8 9" />
+          </svg>
         </a>
+        <button class="footer-social-btn theme-toggle-btn" id="themeToggleFooter" aria-label="Toggle Theme"
+          title="Toggle Light / Dark Mode">
+          <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+        <button class="footer-social-btn theme-toggle-btn" id="themeToggleFooter" aria-label="Toggle Theme" title="Toggle Light / Dark Mode">
+          <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
       </div>
 
       <!-- Quick Nav Links -->
@@ -2635,7 +3246,8 @@
 
   <!-- Floating Back to Top Button -->
   <button class="back-to-top" id="backToTop" title="Back to Top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+      stroke-linecap="round" stroke-linejoin="round">
       <path d="M18 15l-6-6-6 6" />
     </svg>
   </button>
@@ -2687,10 +3299,10 @@
           if (this.x < 0 || this.x > width) this.vx *= -1;
           if (this.y < 0 || this.y > height) this.vy *= -1;
         }
-        draw() {
+        draw(isLight) {
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-          ctx.fillStyle = this.color + '0.7)';
+          ctx.fillStyle = isLight ? (Math.random() > 0.5 ? 'rgba(2, 132, 199, 0.65)' : 'rgba(5, 150, 105, 0.65)') : (this.color + '0.7)');
           ctx.fill();
         }
       }
@@ -2701,11 +3313,12 @@
 
       function animateCanvas() {
         ctx.clearRect(0, 0, width, height);
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
 
         for (let i = 0; i < particles.length; i++) {
           const p = particles[i];
           p.update();
-          p.draw();
+          p.draw(isLight);
 
           // Connect with other particles
           for (let j = i + 1; j < particles.length; j++) {
@@ -2715,11 +3328,11 @@
             const dist = Math.sqrt(dx * dx + dy * dy);
 
             if (dist < 110) {
-              const alpha = (1 - dist / 110) * 0.22;
+              const alpha = (1 - dist / 110) * (isLight ? 0.35 : 0.22);
               ctx.beginPath();
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(p2.x, p2.y);
-              ctx.strokeStyle = 'rgba(0, 245, 160,' + alpha + ')';
+              ctx.strokeStyle = isLight ? ('rgba(2, 132, 199,' + alpha + ')') : ('rgba(0, 245, 160,' + alpha + ')');
               ctx.lineWidth = 0.75;
               ctx.stroke();
             }
@@ -2731,11 +3344,11 @@
             const mdy = p.y - mouse.y;
             const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
             if (mdist < mouse.maxDist) {
-              const mAlpha = (1 - mdist / mouse.maxDist) * 0.35;
+              const mAlpha = (1 - mdist / mouse.maxDist) * (isLight ? 0.45 : 0.35);
               ctx.beginPath();
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(mouse.x, mouse.y);
-              ctx.strokeStyle = 'rgba(0, 242, 254,' + mAlpha + ')';
+              ctx.strokeStyle = isLight ? ('rgba(124, 58, 237,' + mAlpha + ')') : ('rgba(0, 242, 254,' + mAlpha + ')');
               ctx.lineWidth = 1;
               ctx.stroke();
             }
@@ -2747,14 +3360,10 @@
     })();
 
     // -------------------------------------------------------------------------
-    // 2. CUSTOM CURSOR & SPOTLIGHT EFFECT
+    // 2. SIMPLE PURPLE CURSOR DOT FOLLOWER
     // -------------------------------------------------------------------------
     const cursorDot = document.getElementById('cursor-dot');
-    const cursorRing = document.getElementById('cursor-ring');
-    const cursorGlow = document.getElementById('cursor-glow');
-
     let mouseX = -100, mouseY = -100;
-    let ringX = -100, ringY = -100;
 
     window.addEventListener('mousemove', e => {
       mouseX = e.clientX;
@@ -2763,26 +3372,15 @@
       if (cursorDot) {
         cursorDot.style.left = mouseX + 'px';
         cursorDot.style.top = mouseY + 'px';
-      }
-      if (cursorGlow) {
-        cursorGlow.style.left = mouseX + 'px';
-        cursorGlow.style.top = mouseY + 'px';
-        cursorGlow.style.opacity = '1';
+        cursorDot.style.opacity = '1';
       }
     }, { passive: true });
 
-    function renderRing() {
-      ringX += (mouseX - ringX) * 0.16;
-      ringY += (mouseY - ringY) * 0.16;
-      if (cursorRing) {
-        cursorRing.style.left = ringX + 'px';
-        cursorRing.style.top = ringY + 'px';
-      }
-      requestAnimationFrame(renderRing);
-    }
-    renderRing();
+    window.addEventListener('mouseleave', () => {
+      if (cursorDot) cursorDot.style.opacity = '0';
+    });
 
-    // Hover effect on clickable elements
+    // Hover effect on clickable elements (smooth scale on purple dot)
     const hoverTargets = document.querySelectorAll('a, button, .card-spotlight, .project-card, .skill-card, .contact-card');
     hoverTargets.forEach(el => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
@@ -2975,6 +3573,38 @@
       toastText.textContent = msg;
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 2600);
+    }
+
+    // -------------------------------------------------------------------------
+    // 10. THEME TOGGLE (LIGHT & DARK MODE) SYSTEM
+    // -------------------------------------------------------------------------
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      try {
+        localStorage.setItem('portfolio-theme', theme);
+      } catch (e) { }
+
+      // Update mobile browser address bar theme
+      const metaTheme = document.querySelector('meta[name="theme-color"]');
+      if (metaTheme) {
+        metaTheme.setAttribute('content', theme === 'light' ? '#f8fafc' : '#06080f');
+      }
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const targetTheme = current === 'dark' ? 'light' : 'dark';
+      applyTheme(targetTheme);
+      showToast(targetTheme === 'light' ? 'Light mode enabled ☀️' : 'Dark mode enabled 🌙');
+    }
+
+    const themeToggleBtn = document.getElementById('themeToggle');
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', toggleTheme);
+    }
+    const themeToggleFooter = document.getElementById('themeToggleFooter');
+    if (themeToggleFooter) {
+      themeToggleFooter.addEventListener('click', toggleTheme);
     }
   </script>
 </body>
